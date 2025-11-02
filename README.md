@@ -196,7 +196,7 @@ npm run dev
 
 The communication addresses among different modules are configured through `.env` files:
 
-| 路径                    | 功能说明                                        |
+| PATH                    | Function Illustration                                        |
 | --------------------- | ------------------------------------------- |
 | `backend_detect/.env` | Defines the IP and port for frontend access to `backend\_detect`             |
 | `backend_model/.env`  | Defines the address for `backend\_model` to access `backend\_detect`    |
@@ -223,6 +223,7 @@ Adjust the IP and port numbers according to your actual runtime environment to e
 ```bash
 conda update -n base -c defaults conda
 ```
+
 
 
 
