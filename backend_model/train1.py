@@ -7,7 +7,6 @@ from ultralytics.models.yolo.detect import DetectionTrainer
 from pre import split_dataset, batch_convert
 import itertools
 
-# 必须在导入任何PyTorch相关库之前设置
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
@@ -29,16 +28,6 @@ def Parameter_settings():
     | `mosaic`      |可以试试关闭后看单样本训练效果，特别是缺陷小目标多时                        |                            |
     """
 
-    # 'hsv_h': 0.015,
-    # 'hsv_s': 0.7,
-    # 'hsv_v': 0.4,
-    # 'degrees': 10,
-    # 'translate': 0.1,
-    # 'scale': 0.5,
-    # 'shear': 2.0,
-    # 'perspective': 0.001
-    # 定义参数候选范围
-
     hsv_h_values = [0.015]
     hsv_s_values = [0.5]
     hsv_v_values = [0.4]
@@ -51,7 +40,6 @@ def Parameter_settings():
     conf = [0.05]
     iou = [0.5]
 
-    # 所有组合
     all_combinations = itertools.product(
         hsv_h_values,
         hsv_s_values,
@@ -66,7 +54,6 @@ def Parameter_settings():
         iou
     )
 
-    # 生成字典列表
     param_list = []
     for combo in all_combinations:
         param = {
@@ -88,13 +75,9 @@ def Parameter_settings():
     return param_list
 
 def init_cuda_memory():
-    """初始化CUDA内存设置"""
-    # 1. 设置防止碎片的环境变量
     os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
     
-    # 2. 预热GPU内存（关键步骤）
     try:
-        # 分配一个小张量来初始化CUDA上下文
         x = torch.ones((1024, 1024)).cuda()
         del x
         torch.cuda.empty_cache()
@@ -123,9 +106,7 @@ if __name__ == '__main__':
     #model = YOLO("./yolo11m.pt")
     #model = YOLO('./yolov8m.pt')
     for param in param_list:
-         # 重置CUDA设备
         torch.cuda.empty_cache()
-    # 创建一个虚假的tensor来触发内存清理
         x = torch.zeros(1).cuda()
         del x
         torch.cuda.empty_cache()
