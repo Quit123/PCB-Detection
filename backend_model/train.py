@@ -25,16 +25,6 @@ def Parameter_settings():
     | `mosaic`      |可以试试关闭后看单样本训练效果，特别是缺陷小目标多时                        |                            |
     """
 
-    # 'hsv_h': 0.015,
-    # 'hsv_s': 0.7,
-    # 'hsv_v': 0.4,
-    # 'degrees': 10,
-    # 'translate': 0.1,
-    # 'scale': 0.5,
-    # 'shear': 2.0,
-    # 'perspective': 0.001
-    # 定义参数候选范围
-
     hsv_h_values = [0.015]
     hsv_s_values = [0.5]
     hsv_v_values = [0.4]
@@ -47,7 +37,6 @@ def Parameter_settings():
     conf = [0.05]
     iou = [0.5]
 
-    # 所有组合
     all_combinations = itertools.product(
         hsv_h_values,
         hsv_s_values,
@@ -62,7 +51,6 @@ def Parameter_settings():
         iou
     )
 
-    # 生成字典列表
     param_list = []
     for combo in all_combinations:
         param = {
