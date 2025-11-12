@@ -1,6 +1,6 @@
 # PCB Detection(Model Backend)
 
-## 目录结构
+## Directory Structure
 
 The dataset for this project is organized as follows, designed for the **BJ-PCB** defect detection task:
 
